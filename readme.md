@@ -1,5 +1,3 @@
-Certainly! Here's the Markdown formatted README documentation with the project name "YouTube Video Automation":
-
 ```markdown
 # YouTube Video Automation
 
