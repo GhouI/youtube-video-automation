@@ -1,4 +1,4 @@
-```markdown
+
 # YouTube Video Automation
 
 YouTube Video Automation is an innovative tool designed to simplify the process of creating engaging Would You Rather content for YouTube and other video platforms. By integrating with OpenAI's GPT language model, this tool generates thought-provoking questions and creates visually appealing content that captures and maintains viewer engagement.
@@ -67,9 +67,6 @@ YouTube Video Automation is an innovative tool designed to simplify the process 
 
 Contributions are welcome! Fork the repository and submit a pull request.
 
-## Contact
-
-For questions, feedback, and collaboration, feel free to reach out at [email@example.com](mailto:email@example.com).
 
 ## License
 
