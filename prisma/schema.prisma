@@ -13,5 +13,5 @@ datasource db {
 model Video {
   id             String @id @default(auto()) @map("_id") @db.ObjectId
   TakenThemes    String
-  TakenSentences String
+  TakenSentences String[]
 }
