@@ -1,7 +1,13 @@
 import { QuestionsAndAnswers } from "../Misc/Variables";
 import { createCanvas, loadImage } from "canvas";
 import fs from "fs"
-export async function createImages(ImageTemplatePath : string, ImagesOutputPath: string) {
+/**
+ * Creates images from questions and answers and saves them in the specified output path.
+ * @param {string} ImageTemplatePath - The path to the image template.
+ * @param {string} ImagesOutputPath - The path where the images will be saved.
+ * @returns {Promise<{ message: string }>} A Promise that resolves with a status message.
+ */
+export default async function CreateImages(ImageTemplatePath : string, ImagesOutputPath: string)  {
     if (QuestionsAndAnswers.size === 0) {
         console.error("No questions or answers found.");
         return { message: "No questions or answers found." };
@@ -58,7 +64,7 @@ export async function createImages(ImageTemplatePath : string, ImagesOutputPath:
 
             context.fillText(secondpart, secondTextX, secondTextY);
 
-            const outputPath = `${ImagesOutputPath}${count}a.png`;
+            const outputPath = `${ImagesOutputPath}/images_${count}a.png`;
             const stream = fs.createWriteStream(outputPath);
             const streamPNG = canvas.createPNGStream();
             streamPNG.pipe(stream);
@@ -112,11 +118,12 @@ export async function createImages(ImageTemplatePath : string, ImagesOutputPath:
             context.fillText(FakeResultOption1, 480, 540)
             context.fillText(FakeResultOption2, 480, 1400)
             
-            const outputPath = `${ImagesOutputPath}${count}b.png`;
+            const outputPath = `${ImagesOutputPath}/images_${count}b.png`;
             const stream = fs.createWriteStream(outputPath);
             const streamPNG = canvas.createPNGStream();
             streamPNG.pipe(stream);
         });
+        
     }
 
     console.log("Compiled all Images in output folder")

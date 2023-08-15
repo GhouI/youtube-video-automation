@@ -8,29 +8,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
-const getThemeOfTheDay_1 = require("./Modules/getThemeOfTheDay");
-//Variables
-const QuestionsAndAnswers = new Map;
-const ImageTemplatePath = "./images/input/template.png";
-const ImagesOutputPath = "./images/output/";
-const outputVideoPath = "./videos/";
-const ImagesPath = [];
+const Modules_1 = require("./Modules");
+const path_1 = __importDefault(require("path"));
+const Variables_1 = require("./Misc/Variables");
 // Load environment variables from .env file
 (0, dotenv_1.config)();
-// Main execution flow
+/**
+ * Main execution flow of the program.
+ * @returns {Promise<void>} A Promise that resolves after the main execution.
+ */
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const a = yield (0, getThemeOfTheDay_1.getThemeOfTheDay)();
-        console.log(a);
         try {
-            /*
-            await getQuestionsFromClient();
-            await createImages();
-            await convertImagesToPaths();
-            await convertImagesToVideo();
-            */
+            //Setting up configuration
+            yield (0, Modules_1.Setup)();
+            // Get the current date
+            const currentDate = yield (0, Modules_1.getCurrentDate)();
+            // Create and check the date folder
+            yield (0, Modules_1.createAndCheckDateFolder)();
+            // Fetch and compile theme and questions
+            const theme = yield (0, Modules_1.fetchThemeOfTheDay)();
+            yield (0, Modules_1.fetchAndCompileQuestions)(theme);
+            // Create images and paths
+            const imagesFolderPath = path_1.default.join(__dirname, "..", 'videos', currentDate, 'images');
+            const videoFolderPath = path_1.default.join(__dirname, "..", 'videos', currentDate, 'video');
+            console.log(videoFolderPath);
+            yield (0, Modules_1.CreateImages)("./images/input/template.png", imagesFolderPath);
+            yield (0, Modules_1.CreateImagePaths)(imagesFolderPath);
+            yield (0, Modules_1.saveThemeForTheDay)(theme, Array.from(Variables_1.QuestionsAndAnswers.keys()));
+            yield (0, Modules_1.CreateVideoFomImages)(`${videoFolderPath}/video_x2.mp4`);
+            console.log("Main execution completed.");
         }
         catch (error) {
             console.error("An error occurred:", error);

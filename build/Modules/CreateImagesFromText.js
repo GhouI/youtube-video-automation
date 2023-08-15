@@ -12,11 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createImages = void 0;
 const Variables_1 = require("../Misc/Variables");
 const canvas_1 = require("canvas");
 const fs_1 = __importDefault(require("fs"));
-function createImages(ImageTemplatePath, ImagesOutputPath) {
+/**
+ * Creates images from questions and answers and saves them in the specified output path.
+ * @param {string} ImageTemplatePath - The path to the image template.
+ * @param {string} ImagesOutputPath - The path where the images will be saved.
+ * @returns {Promise<{ message: string }>} A Promise that resolves with a status message.
+ */
+function CreateImages(ImageTemplatePath, ImagesOutputPath) {
     return __awaiter(this, void 0, void 0, function* () {
         if (Variables_1.QuestionsAndAnswers.size === 0) {
             console.error("No questions or answers found.");
@@ -65,7 +70,7 @@ function createImages(ImageTemplatePath, ImagesOutputPath) {
                 const secondTextX = (image.width - context.measureText(secondpart).width) / 2;
                 const secondTextY = image.height - 100;
                 context.fillText(secondpart, secondTextX, secondTextY);
-                const outputPath = `${ImagesOutputPath}${count}a.png`;
+                const outputPath = `${ImagesOutputPath}/images_${count}a.png`;
                 const stream = fs_1.default.createWriteStream(outputPath);
                 const streamPNG = canvas.createPNGStream();
                 streamPNG.pipe(stream);
@@ -110,7 +115,7 @@ function createImages(ImageTemplatePath, ImagesOutputPath) {
                 context.font = `${100}px overmch`;
                 context.fillText(FakeResultOption1, 480, 540);
                 context.fillText(FakeResultOption2, 480, 1400);
-                const outputPath = `${ImagesOutputPath}${count}b.png`;
+                const outputPath = `${ImagesOutputPath}/images_${count}b.png`;
                 const stream = fs_1.default.createWriteStream(outputPath);
                 const streamPNG = canvas.createPNGStream();
                 streamPNG.pipe(stream);
@@ -119,4 +124,4 @@ function createImages(ImageTemplatePath, ImagesOutputPath) {
         console.log("Compiled all Images in output folder");
     });
 }
-exports.createImages = createImages;
+exports.default = CreateImages;
