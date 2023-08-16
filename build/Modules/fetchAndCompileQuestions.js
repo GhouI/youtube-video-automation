@@ -15,16 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const GPT_1 = require("../gpt/GPT");
 const prompt_1 = __importDefault(require("../Misc/prompt"));
 const Variables_1 = require("../Misc/Variables");
+const client_1 = require("@prisma/client");
 /**
  * Fetches questions from the GPT client and compiles them with fake results.
  * @param {string} ForbiddenThemes - A string containing forbidden themes.
  * @returns {Promise<void>} A Promise that resolves after fetching and compiling the questions.
  */
-function fetchAndCompileQuestions(ForbiddenThemes) {
+function fetchAndCompileQuestions(ThemeOfTheDay) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log("Getting the questions from GPT.");
             const client = new GPT_1.GPTClient();
+            const PClient = new client_1.PrismaClient();
             // Send prompt to the GPT client
             const sendMessage = yield client.message([
                 {
@@ -33,7 +35,7 @@ function fetchAndCompileQuestions(ForbiddenThemes) {
                 },
                 {
                     role: "user",
-                    content: `theme: Random output: 7 ForbiddenThemes: ${ForbiddenThemes}`,
+                    content: `theme: ${ThemeOfTheDay} output: 5 `,
                 },
             ]);
             const theListOfQuestions = JSON.parse(sendMessage.message);

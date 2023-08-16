@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Setup = exports.TempAutoDelete = exports.ImagesPath = exports.ImagesOutputPath = exports.ImageTemplatePath = exports.QuestionsAndAnswers = void 0;
+exports.CurrentVideoPath = exports.Setup = exports.TempAutoDelete = exports.ImagesPath = exports.ImagesOutputPath = exports.ImageTemplatePath = exports.QuestionsAndAnswers = void 0;
 // A map to store questions and their associated fake results
 exports.QuestionsAndAnswers = new Map();
 // Path to the image template
@@ -19,3 +19,4 @@ exports.Setup = {
         this.hasSetupRun = true;
     },
 };
+exports.CurrentVideoPath = [];

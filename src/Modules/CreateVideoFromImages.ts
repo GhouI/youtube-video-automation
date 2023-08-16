@@ -1,5 +1,5 @@
 import Ffmpeg from "fluent-ffmpeg";
-import { ImagesPath } from "../Misc/Variables";
+import { CurrentVideoPath, ImagesPath } from "../Misc/Variables";
 import fs from 'fs';
 
 /**
@@ -28,7 +28,7 @@ export default async function CreateCustomSlideshowVideo(VideoOutputPath: string
 
     // Set output video format and options
     ff.output(VideoOutputPath).outputOptions('-c:v', 'libx264', '-pix_fmt', 'yuv420p');
-
+    CurrentVideoPath.push(VideoOutputPath)
     // Run the ffmpeg command to create the video
     ff.run();
 

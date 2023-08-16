@@ -2,17 +2,17 @@ import { GPTClient } from "../gpt/GPT";
 import prompt from "../Misc/prompt";
 import { ListOfQuestions, FakeResults } from "../Misc/Interfaces";
 import { QuestionsAndAnswers } from "../Misc/Variables";
-
+import { PrismaClient } from "@prisma/client";
 /**
  * Fetches questions from the GPT client and compiles them with fake results.
  * @param {string} ForbiddenThemes - A string containing forbidden themes.
  * @returns {Promise<void>} A Promise that resolves after fetching and compiling the questions.
  */
-export default async function fetchAndCompileQuestions(ForbiddenThemes: string): Promise<void> {
+export default async function fetchAndCompileQuestions(ThemeOfTheDay : string): Promise<void> {
     try {
         console.log("Getting the questions from GPT.");
         const client = new GPTClient();
-
+        const PClient = new PrismaClient() 
         // Send prompt to the GPT client
         const sendMessage = await client.message([
             {
@@ -21,7 +21,7 @@ export default async function fetchAndCompileQuestions(ForbiddenThemes: string):
             },
             {
                 role: "user",
-                content: `theme: Random output: 7 ForbiddenThemes: ${ForbiddenThemes}`,
+                content: `theme: ${ThemeOfTheDay} output: 5 `,
             },
         ]);
 

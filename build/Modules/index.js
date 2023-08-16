@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateVideoFomImages = exports.getCurrentDate = exports.createAndCheckDateFolder = exports.Setup = exports.saveThemeForTheDay = exports.fetchThemeOfTheDay = exports.TemporaryAutoDelete = exports.fetchAndCompileQuestions = exports.CreateImages = exports.CreateImagePaths = void 0;
+exports.UploadVideoToServices = exports.CreateVideoFomImages = exports.getCurrentDate = exports.createAndCheckDateFolder = exports.Setup = exports.saveThemeForTheDay = exports.fetchThemeOfTheDay = exports.TemporaryAutoDelete = exports.fetchAndCompileQuestions = exports.CreateImages = exports.CreateImagePaths = void 0;
 var CreateImagePaths_1 = require("./CreateImagePaths");
 Object.defineProperty(exports, "CreateImagePaths", { enumerable: true, get: function () { return __importDefault(CreateImagePaths_1).default; } });
 var CreateImagesFromText_1 = require("./CreateImagesFromText");
@@ -22,3 +22,5 @@ Object.defineProperty(exports, "createAndCheckDateFolder", { enumerable: true, g
 Object.defineProperty(exports, "getCurrentDate", { enumerable: true, get: function () { return CreateFolderDate_1.getCurrentDate; } });
 var CreateVideoFromImages_1 = require("./CreateVideoFromImages");
 Object.defineProperty(exports, "CreateVideoFomImages", { enumerable: true, get: function () { return __importDefault(CreateVideoFromImages_1).default; } });
+var UploadVideoToServices_1 = require("./UploadVideoToServices");
+Object.defineProperty(exports, "UploadVideoToServices", { enumerable: true, get: function () { return __importDefault(UploadVideoToServices_1).default; } });

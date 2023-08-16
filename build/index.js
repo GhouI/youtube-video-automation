@@ -37,11 +37,12 @@ function main() {
             // Create images and paths
             const imagesFolderPath = path_1.default.join(__dirname, "..", 'videos', currentDate, 'images');
             const videoFolderPath = path_1.default.join(__dirname, "..", 'videos', currentDate, 'video');
-            console.log(videoFolderPath);
             yield (0, Modules_1.CreateImages)("./images/input/template.png", imagesFolderPath);
             yield (0, Modules_1.CreateImagePaths)(imagesFolderPath);
             yield (0, Modules_1.saveThemeForTheDay)(theme, Array.from(Variables_1.QuestionsAndAnswers.keys()));
-            yield (0, Modules_1.CreateVideoFomImages)(`${videoFolderPath}/video_x2.mp4`);
+            yield (0, Modules_1.CreateVideoFomImages)(`${videoFolderPath}/video_x2.mp4`).then(() => __awaiter(this, void 0, void 0, function* () {
+                yield (0, Modules_1.UploadVideoToServices)();
+            }));
             console.log("Main execution completed.");
         }
         catch (error) {
@@ -49,5 +50,7 @@ function main() {
         }
     });
 }
-// Start the main execution
 main();
+setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield main();
+}), 24 * 60 * 60 * 100);

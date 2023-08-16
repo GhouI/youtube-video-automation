@@ -24,3 +24,4 @@ export const Setup = {
         this.hasSetupRun = true;
     },
 };
+export const CurrentVideoPath : string[] = []

@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { fetchAndCompileQuestions, fetchThemeOfTheDay, CreateImagePaths, createAndCheckDateFolder, getCurrentDate, CreateImages, Setup, saveThemeForTheDay, CreateVideoFomImages } from "./Modules";
+import { fetchAndCompileQuestions, fetchThemeOfTheDay, CreateImagePaths, createAndCheckDateFolder, getCurrentDate, CreateImages, Setup, saveThemeForTheDay, CreateVideoFomImages, UploadVideoToServices } from "./Modules";
 import path from "path";
 import { QuestionsAndAnswers } from "./Misc/Variables";
 
@@ -13,6 +13,7 @@ config();
  */
 async function main(): Promise<void> {
     try {
+
         //Setting up configuration
         await Setup();
         // Get the current date
@@ -28,16 +29,21 @@ async function main(): Promise<void> {
         // Create images and paths
         const imagesFolderPath = path.join(__dirname, "..",  'videos',  currentDate, 'images');
         const videoFolderPath = path.join(__dirname, "..",  'videos',  currentDate, 'video')
-        console.log(videoFolderPath)
         await CreateImages("./images/input/template.png", imagesFolderPath);
         await CreateImagePaths(imagesFolderPath);
         await saveThemeForTheDay(theme, Array.from(QuestionsAndAnswers.keys()))
-        await CreateVideoFomImages(`${videoFolderPath}/video_x2.mp4`,);
+        await CreateVideoFomImages(`${videoFolderPath}/video_x2.mp4`).then(async () =>{
+            await UploadVideoToServices()
+
+        });
+
         console.log("Main execution completed.");
     } catch (error) {
         console.error("An error occurred:", error);
     }
 }
+ main()
+setInterval(async () =>{
+    await main()
+}, 24 * 60 * 60 * 100)
 
-// Start the main execution
-main();

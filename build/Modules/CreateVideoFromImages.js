@@ -38,6 +38,7 @@ function CreateCustomSlideshowVideo(VideoOutputPath) {
         ff.input(imageListFile).inputOptions('-f', 'concat', '-safe', '0');
         // Set output video format and options
         ff.output(VideoOutputPath).outputOptions('-c:v', 'libx264', '-pix_fmt', 'yuv420p');
+        Variables_1.CurrentVideoPath.push(VideoOutputPath);
         // Run the ffmpeg command to create the video
         ff.run();
         // Listen for progress, completion, and error events

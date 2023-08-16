@@ -16,5 +16,4 @@ for the fake_result please leave the format the way it is except the values. so 
 The user input will be in this format:
 theme: A theme based on the "Would You Rather" question
 output: The number of "Would You Rather" questions you should post, for example, 5.
-ForbiddenThemes: Themes that have already been used; make sure not to post about them. If it says null, that means any theme is allowed.
 Make sure these questions have a unique twist to them.`
