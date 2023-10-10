@@ -12,18 +12,16 @@ export default async function convertImagesToPaths(ImagesOutputPath: string): Pr
     try {
         const directory = fs.readdirSync(ImagesOutputPath);
         
-        if (directory.length > 0) {
-            console.log("Directory has been found.");
-            
-            directory.forEach(file => {
+        if (directory.length == 0) {
+            console.log("Directory is empty.");
+            return null;
+        } 
+                directory.forEach(file => {
                 const filePath = path.join(ImagesOutputPath, file)
                     .replace(/\\/g, '/')
                     .replace(/^\.\//, '');
                 ImagesPath.push(filePath);
             });
-        } else {
-            console.log("Directory is empty.");
-        }
     } catch (error) {
         console.error("Error reading directory:", error);
         throw error;
